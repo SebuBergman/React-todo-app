@@ -1,25 +1,48 @@
-import logo from './logo.svg';
+import React, { useState } from'react';
 import './App.css';
+import './app.scss';
+import TodoList from './components/TodoList';
+import AddTodo from './components/AddTodo';
+import { v4 as uuid } from 'uuid';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [todos, setTodos] = useState([]);
+  /*handleChange = (e) => {
+    this.setState({
+      todo: e.target.value
+    });
+  }*/
+
+  function submitTodo(title) {
+    const newTodo = {
+      id: uuid(),
+			title: title,
+			completed: false,
+    }
+    setTodos([...todos, newTodo]);
+  }
+
+  function toggleCompleted(id) {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id? {...todo, completed:!todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  }
+
+    return (
+      <div className="todo-app">
+        <div className="todo-app_Container">
+          <div className="todo-app_Wrapper">
+            <AddTodo submitTodo={submitTodo}/>
+            <TodoList 
+              todos={todos}
+              toggleCompleted={toggleCompleted}
+              //onDelete={deleteTodo}
+            />
+          </div>
+        </div>
+      </div>
+    );
 }
 
 export default App;
