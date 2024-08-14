@@ -41,11 +41,15 @@ function App() {
     );
   }
 
+  function clearTodos() {
+    setTodos([]);
+  }
+
   return (
     <div className="todo-app">
       <div className="todo-app_Container">
         <div className="todo-app_Wrapper">
-          <AddTodo submitTodo={submitTodo}/>
+          <AddTodo submitTodo={submitTodo} todoLength={todos.length} clearTodos={clearTodos}/>
           <TodoList 
             todos={todos}
             toggleCompleted={toggleCompleted} // Added this line to pass toggleCompleted function to TodoList component
