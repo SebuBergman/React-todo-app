@@ -6,10 +6,8 @@ function AddTodo({ submitTodo, todoLength, clearTodos }) {
     const [todo, setTodo] = useState('');
 
     let addTodoContent;
-    console.log(todoLength);
 
     if (todoLength === 0) {
-        console.log("Is zero");
         addTodoContent = (
             <>
                 <div className="input-group">
@@ -24,45 +22,50 @@ function AddTodo({ submitTodo, todoLength, clearTodos }) {
                         onChange={(e) => setTodo(e.target.value)}
                     />
                 </div>
-                <button
-                    onClick={() => {
-                        setTodo("");
-                        submitTodo(todo);
-                    }}
-                >
-                    Add task
-                </button>
+                <div className="input_buttonContainer">
+                    <button
+                        className="add_button"
+                        onClick={() => {
+                            setTodo("");
+                            submitTodo(todo);
+                        }}
+                    >
+                        Add task
+                    </button>
+                </div>
             </>
         )
     } else {
-        console.log("Is more than zero");
         addTodoContent = (
             <>
                 <div className="input-group">
                     <div className="input-icon">
                         <FaBook color="white" />
                     </div>
-                    
                     <input
                         className="input"
                         placeholder="Add a new task"
                         value={todo}
                         onChange={(e) => setTodo(e.target.value)}
-                    /> 
+                    />
                 </div>
-                <button
-                    onClick={() => {
-                        setTodo("");
-                        submitTodo(todo);
-                    }}
-                >
-                    Add task
-                </button>
-                <button
-                    onClick={clearTodos}
-                >
-                    Clear todos
-                </button>
+                <div className="input_buttonContainer">
+                    <button
+                        className="add_button_1"
+                        onClick={() => {
+                            setTodo("");
+                            submitTodo(todo);
+                        }}
+                    >
+                        Add task
+                    </button>
+                    <button
+                        className="add_button_2"
+                        onClick={clearTodos}
+                    >
+                        Clear todos
+                    </button>
+                </div>
             </>
         )
     }

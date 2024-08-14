@@ -21,14 +21,32 @@
         }
     }
 
-    button {
-        margin-top: 10px;
-        width: 100%;
-        height: 40px;
-        background-color: lightblue;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
+    .input_buttonContainer {
+        display: flex;
+
+        .add_button {
+                border-radius: 10px;
+            }
+        
+        .add_button_1 {
+            flex: 2;
+            border-radius: 10px 0px 0px 10px;
+        }
+    
+        .add_button_2 {
+            flex: 1;
+            border-radius: 0px 10px 10px 0px;
+            border-left: 0px;
+        }
+    
+        button {
+            margin-top: 10px;
+            width: 100%;
+            height: 40px;
+            background-color: lightblue;
+            border: 2px solid black;
+            cursor: pointer;
+        }
     }
 }
 
@@ -50,11 +68,11 @@
     }
 
     .todo-editButton {
-            padding: 10px;
-            background-color: lightblue;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+        padding: 10px 15px 10px 15px;
+        background-color: lightblue;
+        border: 2px solid black;
+        border-radius: 10px;
+        cursor: pointer;
     }
 
     .completed-task {

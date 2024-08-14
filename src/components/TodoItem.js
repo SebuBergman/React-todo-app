@@ -9,6 +9,7 @@ function TodoItem({ todo, toggleCompleted, deleteTodo, onTodoChange }) {
     const [isEditing, setIsEditing] = useState(false);
 
     let todoContent;
+    console.log(todo);
 
     if (isEditing) {
         todoContent = (
