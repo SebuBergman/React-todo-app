@@ -38,65 +38,20 @@ function tasksReducer(tasks, action) {
   }
 }
 
-/*
-todos.map((todo) => {
-        if (todo.id === editedTodo.id) {
-          return editedTodo;
-        } else {
-          return todo;
-        }
-      })
-*/
 function App() {
   const[todos, dispatch] = useReducer(tasksReducer, []); // useReducer hook to manage the state
-
-  function submitTodo(title) { // Function add a new todo to the list
-    dispatch({
-      type: "ADD_TODO",
-      title,
-    });
-  }
-
-  function toggleCompleted(id) { 
-    dispatch({
-      type: "TOGGLE_COMPLETED",
-      id,
-    });
-  }
-
-  function editTodo(editedTodo) { // Function to edit a todo using its id
-    dispatch({
-      type: "EDIT_TODO",
-      editedTodo,
-    });
-  }
-  function deleteTodo(id) {
-    dispatch({
-      type: "DELETE_TODO",
-      id,
-    }) // Function to delete a todo using its id
-  }
-
-  function clearTodos() {
-    dispatch({
-      type: "CLEAR_TODOS",
-    });
-  }
 
   return (
     <div className="todo-app">
       <div className="todo-app_Container">
         <div className="todo-app_Wrapper">
           <AddTodo
-            submitTodo={submitTodo}
+            dispatch={dispatch}
             todoLength={todos.length}
-            clearTodos={clearTodos}
           />
           <TodoList 
             todos={todos}
-            toggleCompleted={toggleCompleted} // Added this line to pass toggleCompleted function to TodoList component
-            deleteTodo={deleteTodo} // Added this line to pass deleteTodo function to TodoList component
-            onTodoChange={editTodo} // Added this line to pass editTodo function to TodoList component
+            dispatch={dispatch}
           />
         </div>
       </div>

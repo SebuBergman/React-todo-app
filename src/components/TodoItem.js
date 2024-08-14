@@ -5,7 +5,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaRegSquare } from "react-icons/fa";
 import { FaRegSquareCheck } from "react-icons/fa6";
 
-function TodoItem({ todo, toggleCompleted, deleteTodo, onTodoChange }) {
+function TodoItem({ todo, dispatch }) {
     const [isEditing, setIsEditing] = useState(false);
 
     let todoContent;
@@ -19,9 +19,9 @@ function TodoItem({ todo, toggleCompleted, deleteTodo, onTodoChange }) {
                     className="todo-editItem"
                     value={todo.title}
                     onChange={(e) => {
-                        onTodoChange({
-                            ...todo,
-                            title: e.target.value,
+                        dispatch({
+                            type: "EDIT_TODO",
+                            editedTodo: {...todo, title: e.target.value,},
                         });
                     }}
                 />
@@ -39,19 +39,29 @@ function TodoItem({ todo, toggleCompleted, deleteTodo, onTodoChange }) {
                 <h6 className={`${todo.completed ? 'completed-task' : ''}`}>{todo.title}</h6>
                 <div className="todo-icon">
                     <span 
-                        onClick={() => toggleCompleted(todo.id)} // Added this line to toggle completed status when checkbox is clicked
+                        onClick={() => 
+                            dispatch({
+                                type: "TOGGLE_COMPLETED",
+                                id: todo.id,
+                            })
+                        }
                     >
                         {todo.completed ? <FaRegSquareCheck /> : <FaRegSquare />}
                     </span>
                     <span 
                         className="mx-2 text-warning"
-                        onClick={() => setIsEditing(true)}  // Added this line to open edit form when edit icon is clicked
+                        onClick={() => setIsEditing(true)}
                     >
                         <FaPen />
                     </span>
                     <span 
                         className="mx-2 text-danger"
-                        onClick={() => deleteTodo(todo.id)} // Added this line to delete todo when trash icon is clicked
+                        onClick={() => 
+                            dispatch({
+                                type: "DELETE_TODO",
+                                id: todo.id,
+                            })
+                        }
                     >
                         <FaRegTrashAlt />
                     </span>
